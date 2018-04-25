@@ -50,12 +50,12 @@
         <div class="col-3" style="height: 100vh; background-color: transparent">
             <br>
             <div class="message">
-                <p>Your Current Temporary Email Address is: {{ email }}</p>
+                <p>Your Current Temporary Email Address is: {{email}}</p>
             </div>
         </div>
 
         <div class="col-7" style="background-color: transparent; overflow-y: scroll;">
-	    {{ emailmatch }}
+	        {{emailmatch}}
             <br>
             <div class="message">
                 <h6>admissions@tcu.edu</h6>
@@ -99,6 +99,10 @@
     </div>
 
 </div>
+
+<script>
+    alert("{{email}}")
+</script>
 
 </body>
 </html>
