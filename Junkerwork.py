@@ -5,6 +5,8 @@ import imaplib
 import email
 import re
 import random
+import JunkerTempHolder
+
 
 application = Flask(__name__)
 
@@ -13,10 +15,10 @@ application = Flask(__name__)
 def hello_world():
     id = random.randint(0,10000)
     matches = read_email_from_gmail(str(id))
-    email = "junkeremailservices" + str(id) + "@gmail.com"
+    emails = "junkeremailservices" + str(id) + "@gmail.com"
     print(matches)
-
-    return render_template('index.html', emailmatch=read_email_from_gmail(str(id)), email="junkeremailservices+" + id + "@gmail.com")
+    retval = JunkerTempHolder.getTheJunker()
+    return retval.substitute(email=id, emailmatch=matches)
 
 
 def read_email_from_gmail(id):
