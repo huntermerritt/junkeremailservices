@@ -3,7 +3,7 @@ from string import Template
 
 
 def getTheJunker():
-    Temp = Template("""
+    temp = Template("""
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -53,49 +53,15 @@ def getTheJunker():
 
         <div class="container">
             <div class="row">
-                <div class="col-3" style="height: 100vh; background-color: transparent">
+                <div class="col-3" style="height: 75vh; background-color: transparent">
                     <br>
                     <div class="message">
-                        <p>Your Current Temporary Email Address is: {{ email }}</p>
+                        <p>Your Current Temporary Email Address is: ${email}</p>
                     </div>
                 </div>
 
                 <div class="col-7" style="background-color: transparent; overflow-y: scroll;">
-                    {{ emailmatch }}
-                    <br>
-                    <div class="message">
-                        <h6>admissions@tcu.edu</h6>
-                        <p>Thank you for registering for springs classes</p>
-                    </div>
-                    <br>
-                    <div class="message">
-                        <h6>shopping@shoppersrus.com</h6>
-                        <p>Thank you for signing up for our rewards program and please enjoy your coupoun for 15% off your next purchase at any of our locations.</p>
-                    </div>
-
-                    <br>
-                    <div class="message">
-                        <h6>admissions@tcu.edu</h6>
-                        <p>Thank you for registering for springs classes</p>
-                    </div>
-                    <br>
-                    <div class="message">
-                        <h6>shopping@shoppersrus.com</h6>
-                        <p>Thank you for signing up for our rewards program and please enjoy your coupoun for 15% off your next purchase at any of our locations.</p>
-                    </div>
-
-                    <br>
-                    <div class="message">
-                        <h6>admissions@tcu.edu</h6>
-                        <p>Thank you for registering for springs classes</p>
-                    </div>
-                    <br>
-                    <div class="message">
-                        <h6>shopping@shoppersrus.com</h6>
-                        <p>Thank you for signing up for our rewards program and please enjoy your coupoun for 15% off your next purchase at any of our locations.</p>
-                    </div>
-                    <br>
-
+                    ${emailmatch}
                 </div>
 
                 <div class="col-2" style="background-color: transparent;">
@@ -106,11 +72,9 @@ def getTheJunker():
 
         </div>
 
-        <script>
-            alert("{{ email }}")
-        </script>
 
+        <script>document.cookie="pastemail=${email}"</script>
         </body>
         </html>
         """)
-    return Temp
+    return temp

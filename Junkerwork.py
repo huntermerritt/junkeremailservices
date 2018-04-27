@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import smtplib
 import time
 import imaplib
@@ -6,19 +6,58 @@ import email
 import re
 import random
 import JunkerTempHolder
-
+import easyimap
+from string import Template
 
 application = Flask(__name__)
 
 
 @application.route('/')
 def hello_world():
-    id = random.randint(0,10000)
-    matches = read_email_from_gmail(str(id))
-    emails = "junkeremailservices" + str(id) + "@gmail.com"
+    ids = random.randint(0,10000)
+
+    if "pastemail" in request.cookies:
+        p = re.compile('\d+')
+        found = p.search(request.cookies['pastemail'])
+        if found:
+            idmatch = found.group()
+            ids = idmatch
+
+    matches = get_email_from_gmail(str(ids))
+    emails = "junkeremailservices+" + str(ids) + "@gmail.com"
     print(matches)
     retval = JunkerTempHolder.getTheJunker()
-    return retval.substitute(email=id, emailmatch=matches)
+    print(type(retval))
+    return retval.substitute(email=emails, emailmatch=matches)
+
+
+def get_email_from_gmail(idhere):
+    host = "imap.gmail.com"
+    user = "junkeremailservices@gmail.com"
+    password = "junkeremail"
+    mailbox = "INBOX"
+    imapper = easyimap.connect(host, user, password, mailbox)
+    mails = imapper.listup(limit=50)
+    p = re.compile('\d+')
+    emails = []
+    for item in mails:
+        found = p.search(item.to)
+        if found:
+            idofemail = found.group()
+            print("ID of Email: ")
+            print(idofemail)
+            print("ID: ")
+            print(idhere)
+
+            if idofemail == str(idhere):
+                print("In emails with ID: " + idofemail + " and master id : " + str(idhere))
+                emails.append("<h6>From : " + item.from_addr + "</h6><h7>" + "To : " + item.to + "</h7><br><p>" + item.body + "</p>")
+    endstr = ""
+    for temp in emails:
+        endstr = endstr + "<br>" + "<div class=message>" + temp + "</div>" + "<br>"
+    return endstr
+
+
 
 
 def read_email_from_gmail(id):
@@ -58,11 +97,15 @@ def read_email_from_gmail(id):
 
                     if search:
                         email_id = search.group()
+                        print("Inside Search Bool")
+                        print("Email ID = " + str(email_id))
+                        print("Regular ID = " + str(id))
                         if email_id == id:
+                            print("Equals each other" + str(id) + " == " + str(email_id))
                             f.write('From : ' + email_from + '\n')
                             f.write('Subject : ' + email_subject + '\n')
                             f.write('T0 : ' + email_to + '\n')
-                            emails.append("From : " + email_from + "\n" + "TO : " + email_to + "\n" + email_body)
+                            emails.append("<h6>From : " + email_from + "</h6>" + "<h7>To : " + email_to + "</h7>" + "<p>" + email_body + "</p>")
         endstr = ""
         for temp in emails:
             endstr = endstr + "<br>" + "<div class=message>" + temp + "</div>" + "<br>"
@@ -72,5 +115,4 @@ def read_email_from_gmail(id):
 
 
 if __name__ == '__main__':
-    read_email_from_gmail("1245")
-    application.run(host='0.0.0.0')
+    application.run(host='0.0.0.0', port=5001)
