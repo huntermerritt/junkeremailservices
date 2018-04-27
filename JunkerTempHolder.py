@@ -74,7 +74,7 @@ def getTheJunker():
         </div>
 
 
-        <script>document.cookie="pastemail=${email}"</script>
+        
         </body>
         </html>
         """)
