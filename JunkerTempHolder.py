@@ -54,13 +54,14 @@ def getTheJunker():
         <div class="container">
             <div class="row">
                 <div class="col-3" style="height: 75vh; background-color: transparent">
+
+                </div>
+
+                <div class="col-7" style="background-color: transparent; overflow-y: scroll;">
                     <br>
                     <div class="message">
                         <p>Your Current Temporary Email Address is: ${email}</p>
                     </div>
-                </div>
-
-                <div class="col-7" style="background-color: transparent; overflow-y: scroll;">
                     ${emailmatch}
                 </div>
 
