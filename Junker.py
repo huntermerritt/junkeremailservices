@@ -83,21 +83,24 @@ thisstr = '''<!DOCTYPE html>
 @application.route('/')
 def hello_world():
     ids = random.randint(0, 10000)
+    ids = str(ids)
+    #if "pastemail" in request.cookies:
+    #    p = re.compile('\d+')
+    #    found = p.search(request.cookies['pastemail'])
+    #    if found:
+    #        idmatch = found.group()
+    #        ids = idmatch
 
-    if "pastemail" in request.cookies:
-        p = re.compile('\d+')
-        found = p.search(request.cookies['pastemail'])
-        if found:
-            idmatch = found.group()
-            ids = idmatch
-
-    matches = get_email_from_gmail(str(ids))
+    matches = get_email_from_gmail(ids)
     emails = "junkeremailservices+" + str(ids) + "@gmail.com"
     thisstr.replace('{email}', emails)
     thisstr.replace('{emailholder}', matches)
     return thisstr
 
-def get_email_from_gmail(idhere):
+def get_email_from_gmail(ids):
+    a = ids
+
+def get_email_from_gmails(idhere):
     host = "imap.gmail.com"
     user = "junkeremailservices@gmail.com"
     password = "junkeremail"
