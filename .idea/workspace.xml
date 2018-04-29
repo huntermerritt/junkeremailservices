@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f60db01a-6f20-4bb2-b793-634e0bf316cc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Junker.iml" afterPath="$PROJECT_DIR$/.idea/Junker.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Junker.py" afterPath="$PROJECT_DIR$/Junker.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,8 +25,8 @@
       <file leaf-file-name="Junker.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Junker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="83" column="4" lean-forward="false" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="4" />
+            <state relative-caret-position="165">
+              <caret line="90" column="35" lean-forward="true" selection-start-line="90" selection-start-column="35" selection-end-line="90" selection-end-column="35" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -642,7 +639,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524975234493</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Commit with the string on the inside of the function call.">
+      <created>1524976985509</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1524976985509</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -682,7 +686,8 @@
     <MESSAGE value="Made it work!!! Added cookies and better filtering. Changed up location of email block." />
     <MESSAGE value="Should be working now by using string and manually replacing things." />
     <MESSAGE value="Added bare functionality to try and debug." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added bare functionality to try and debug." />
+    <MESSAGE value="Commit with the string on the inside of the function call." />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit with the string on the inside of the function call." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -948,8 +953,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Junker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="83" column="4" lean-forward="false" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="4" />
+        <state relative-caret-position="165">
+          <caret line="90" column="35" lean-forward="true" selection-start-line="90" selection-start-column="35" selection-end-line="90" selection-end-column="35" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>
