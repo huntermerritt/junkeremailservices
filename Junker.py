@@ -2,8 +2,37 @@ from flask import Flask, render_template, request
 import easyimap
 import random
 import re
+import email
+import imaplib
+import email.header
 
 application = Flask(__name__)
+
+def get_email_from_gmail(idhere):
+    host = "imap.gmail.com"
+    user = "junkeremailservices@gmail.com"
+    password = "junkeremail"
+    mailbox = "INBOX"
+    imapper = easyimap.connect(host, user, password, mailbox)
+    mails = imapper.listup(limit=50)
+    p = re.compile('\d+')
+    emails = []
+    for item in mails:
+        found = p.search(item.to)
+        if found:
+            idofemail = found.group()
+            print("ID of Email: ")
+            print(idofemail)
+            print("ID: ")
+            print(idhere)
+
+            if idofemail == str(idhere):
+                print("In emails with ID: " + idofemail + " and master id : " + str(idhere))
+                emails.append("<h6>From : " + item.from_addr + "</h6><h7>" + "To : " + item.to + "</h7><br><p>" + item.body + "</p>")
+    endstr = ""
+    for temp in emails:
+        endstr = endstr + "<br>" + "<div class=message>" + temp + "</div>" + "<br>"
+    return endstr
 
 @application.route('/')
 def hello_world():
@@ -91,30 +120,9 @@ def hello_world():
     #        idmatch = found.group()
     #        ids = idmatch
 
-    host = "imap.gmail.com"
-    user = "junkeremailservices@gmail.com"
-    password = "junkeremail"
-    mailbox = "INBOX"
-    imapper = easyimap.connect(host, user, password, mailbox)
-    mails = imapper.listup(limit=50)
-    p = re.compile('\d+')
-    emails = []
-    for item in mails:
-        found = p.search(item.to)
-        if found:
-            idofemail = found.group()
-            print("ID of Email: ")
-            print(idofemail)
-            print("ID: ")
 
-            if idofemail == str(ids):
-                print("In emails with ID: " + idofemail + " and master id : " + str(ids))
-                emails.append(
-                    "<h6>From : " + item.from_addr + "</h6><h7>" + "To : " + item.to + "</h7><br><p>" + item.body + "</p>")
-    endstr = ""
-    for temp in emails:
-        endstr = endstr + "<br>" + "<div class=message>" + temp + "</div>" + "<br>"
-    matches = endstr
+
+    matches = get_email_from_gmail(ids)
     emails = "junkeremailservices+" + str(ids) + "@gmail.com"
     thisstr = thisstr.replace('{email}', emails)
     thisstr = thisstr.replace('{emailmatch}', matches)
@@ -123,31 +131,7 @@ def hello_world():
 def get_email_from_gmails(ids):
     a = ids
 
-def get_email_from_gmail(idhere):
-    host = "imap.gmail.com"
-    user = "junkeremailservices@gmail.com"
-    password = "junkeremail"
-    mailbox = "INBOX"
-    imapper = easyimap.connect(host, user, password, mailbox)
-    mails = imapper.listup(limit=50)
-    p = re.compile('\d+')
-    emails = []
-    for item in mails:
-        found = p.search(item.to)
-        if found:
-            idofemail = found.group()
-            print("ID of Email: ")
-            print(idofemail)
-            print("ID: ")
-            print(idhere)
 
-            if idofemail == str(idhere):
-                print("In emails with ID: " + idofemail + " and master id : " + str(idhere))
-                emails.append("<h6>From : " + item.from_addr + "</h6><h7>" + "To : " + item.to + "</h7><br><p>" + item.body + "</p>")
-    endstr = ""
-    for temp in emails:
-        endstr = endstr + "<br>" + "<div class=message>" + temp + "</div>" + "<br>"
-    return endstr
 
 
 
