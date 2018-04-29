@@ -54,9 +54,9 @@
                 <div class="col-8" style="background-color: transparent; overflow-y: scroll;">
                     <br>
                     <div class="message">
-                        <p>Your Current Temporary Email Address is: ${email}</p>
+                        <p>Your Current Temporary Email Address is: {{ email }}</p>
                     </div>
-                    ${emailmatch}
+                    {{ emailmatch|safe }}
                 </div>
 
                 <div class="col-2" style="background-color: transparent;">
