@@ -93,14 +93,14 @@ def hello_world():
 
     matches = get_email_from_gmail(ids)
     emails = "junkeremailservices+" + str(ids) + "@gmail.com"
-    thisstr = thisstr.replace('{email}', emails)
-    thisstr.replace('{emailholder}', matches)
+    thisstr = thisstr.replace('{email}', "HUNTER")
+    thisstr = thisstr.replace('{emailmatch}', "HUNTER")
     return thisstr
 
-def get_email_from_gmail(ids):
+def get_email_from_gmails(ids):
     a = ids
 
-def get_email_from_gmails(idhere):
+def get_email_from_gmail(idhere):
     host = "imap.gmail.com"
     user = "junkeremailservices@gmail.com"
     password = "junkeremail"
