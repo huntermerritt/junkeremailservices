@@ -91,10 +91,33 @@ def hello_world():
     #        idmatch = found.group()
     #        ids = idmatch
 
-    matches = get_email_from_gmail(ids)
+    host = "imap.gmail.com"
+    user = "junkeremailservices@gmail.com"
+    password = "junkeremail"
+    mailbox = "INBOX"
+    imapper = easyimap.connect(host, user, password, mailbox)
+    mails = imapper.listup(limit=50)
+    p = re.compile('\d+')
+    emails = []
+    for item in mails:
+        found = p.search(item.to)
+        if found:
+            idofemail = found.group()
+            print("ID of Email: ")
+            print(idofemail)
+            print("ID: ")
+
+            if idofemail == str(ids):
+                print("In emails with ID: " + idofemail + " and master id : " + str(ids))
+                emails.append(
+                    "<h6>From : " + item.from_addr + "</h6><h7>" + "To : " + item.to + "</h7><br><p>" + item.body + "</p>")
+    endstr = ""
+    for temp in emails:
+        endstr = endstr + "<br>" + "<div class=message>" + temp + "</div>" + "<br>"
+    matches = endstr
     emails = "junkeremailservices+" + str(ids) + "@gmail.com"
-    thisstr = thisstr.replace('{email}', "HUNTER")
-    thisstr = thisstr.replace('{emailmatch}', "HUNTER")
+    thisstr = thisstr.replace('{email}', emails)
+    thisstr = thisstr.replace('{emailmatch}', matches)
     return thisstr
 
 def get_email_from_gmails(ids):
