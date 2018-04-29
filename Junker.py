@@ -24,13 +24,13 @@ def hello_world():
             idmatch = found.group()
             ids = idmatch
 
-    matches = get_email_from_gmail(str(ids))
+    matches = get_email_from_gmail(str(4376))
     #matches = ""
     emails = "junkeremailservices+" + str(ids) + "@gmail.com"
     #print(matches)
     retval = JunkerTempHolder.getTheJunker()
-    #print(type(retval))
-    return retval.substitute(email=emails, emailmatch=matches)
+    print(type(retval))
+    return retval.substitute(email="", emailmatch="")
 
 
 def get_email_from_gmail(idhere):
@@ -38,25 +38,35 @@ def get_email_from_gmail(idhere):
     user = "junkeremailservices@gmail.com"
     password = "junkeremail"
     mailbox = "INBOX"
+    temps = open("errorsfound.txt", "w+")
+    temps.write("Before easyimap.connect\n")
     imapper = easyimap.connect(host, user, password, mailbox)
+    #temps.write("After easyimap.connect\n")
     mails = imapper.listup(limit=50)
+    #temps.write("After imapper.listup\n")
     p = re.compile('\d+')
     emails = []
     for item in mails:
+	temps.write("Goint through the mails now\n")
         found = p.search(item.to)
         if found:
+	    temps.write("Found a good one\n")
             idofemail = found.group()
-            #print("ID of Email: ")
-            #print(idofemail)
-            #print("ID: ")
-            #print(idhere)
+            print("ID of Email: ")
+            print(idofemail)
+            print("ID: ")
+            print(idhere)
 
             if idofemail == str(idhere):
-                #print("In emails with ID: " + idofemail + " and master id : " + str(idhere))
+		temps.write("Found where the id matches each other\n")
+                print("In emails with ID: " + idofemail + " and master id : " + str(idhere))
                 emails.append("<h6>From : " + item.from_addr + "</h6><h7>" + "To : " + item.to + "</h7><br><p>" + item.body + "</p>")
     endstr = ""
     for temp in emails:
+	temps.write("Building end string\n")
         endstr = endstr + "<br>" + "<div class=message>" + temp + "</div>" + "<br>"
+    temps.write(endstr)
+    endstr = ""
     return endstr
 
 
